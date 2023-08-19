@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,13 +29,15 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
+        $validatedData = $request->validated();
         $user = new User();
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->mobile_number = $request->mobile_number;
+        $user->first_name = $validatedData['first_name'];
+        $user->last_name = $validatedData['last_name'];
+        $user->mobile_number = $validatedData['mobile_number'];
         $user->save();
+
         return redirect()->route('users.index')
             ->with('success', 'User Created Successfully');
     }
@@ -60,11 +63,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->mobile_number = $request->mobile_number;
+        $validatedData = $request->validated();
+        $user->first_name = $validatedData['first_name'];
+        $user->last_name = $validatedData['last_name'];
+        $user->mobile_number = $validatedData['mobile_number'];
         $user->save();
         return redirect('users');
     }
