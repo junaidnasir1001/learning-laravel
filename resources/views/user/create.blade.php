@@ -20,16 +20,28 @@
                 <form method="POST" action="{{ route('users.store') }}">
                     @csrf
                     <div class="mb-3">
+                        <label for="name"  class="form-label">User Roles</label>
+                        <select class="form-select" name="role_id" aria-label="Default select example">
+                            <option selected>Select a role</option>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="name" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter your First name">
+                        <input type="text" class="form-control" id="first_name" name="first_name"
+                               placeholder="Enter your First name">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter your Last name">
+                        <input type="text" class="form-control" id="last_name" name="last_name"
+                               placeholder="Enter your Last name">
                     </div>
                     <div class="mb-3">
                         <label for="text" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="mobile_number" name="mobile_number" placeholder="Enter your Mobile Number">
+                        <input type="text" class="form-control" id="mobile_number" name="mobile_number"
+                               placeholder="Enter your Mobile Number">
                     </div>
                     <button type="submit" class="btn btn-success">Save</button>
                 </form>
